@@ -38,6 +38,12 @@ void UHealthComponent::LoseHealth(float Amount)
 {
 	Health -= Amount;
 
+	//If the owner implements HealthInterface.
+	if (GetOwner()->Implements<UHealthInterface>())
+	{
+		IHealthInterface::Execute_OnTakeDamage(GetOwner());
+	}
+
 	UE_LOG(LogClass, Warning, TEXT("Damage Taken"));
 	if(Health <= 0.f) 
 	{

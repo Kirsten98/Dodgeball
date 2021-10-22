@@ -3,34 +3,37 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
-#include "HealthComponent.generated.h"
+#include "Components/SceneComponent.h"
+#include "LookAtActorComponent.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class DODGEBALL_API UHealthComponent : public UActorComponent
+class DODGEBALL_API ULookAtActorComponent : public USceneComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UHealthComponent();
+	ULookAtActorComponent();
 
-	//Take health points from owner
-	void LoseHealth(float Amount);
-
-	FORCEINLINE float GetHealthPercent() const
+	FORCEINLINE void SetTarget(AActor* NewTarget)
 	{
-		return Health / 100.f;
+		TargetActor = NewTarget;
+	}
+
+	FORCEINLINE bool CanSeeTarget() const
+	{
+		return bCanSeeTarget;
 	}
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	//The Owner's initial and current amount health points
-	UPROPERTY(EditDefaultsOnly, Category = Health)
-		float Health = 100.f;
+	bool LookAtActor();
 
+	AActor* TargetActor;
+
+	bool bCanSeeTarget = false;
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
