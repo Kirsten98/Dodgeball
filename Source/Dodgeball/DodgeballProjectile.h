@@ -26,6 +26,13 @@ protected:
 	UPROPERTY(EditAnywhere, Category = Damage)
 		float Damage = 34.f;
 
+	//The sound the dodgeball will make when it bounces off a surface
+	UPROPERTY(EditDefaultsOnly, Category = Sound)
+		class USoundBase* BounceSound;
+
+	//Sound attenuation of the previous sound
+	UPROPERTY(EditAnywhere, Category = Sound)
+	class USoundAttenuation* BounceSoundAttuention;
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

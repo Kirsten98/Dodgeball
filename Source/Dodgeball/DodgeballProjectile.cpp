@@ -2,6 +2,7 @@
 
 
 #include "DodgeballProjectile.h"
+#include "Kismet/GameplayStatics.h"
 #include "DodgeballCharacter.h"
 
 // Sets default values
@@ -47,6 +48,12 @@ void ADodgeballProjectile::Tick(float DeltaTime)
 
 void ADodgeballProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
+
+	if (BounceSound != nullptr && NormalImpulse.Size() > 600.f)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, BounceSound, GetActorLocation(), 1.0f,1.0f, 0.0f, BounceSoundAttuention);
+	}
+
 	ADodgeballCharacter* Player = Cast<ADodgeballCharacter>(OtherActor);
 	if (Player != nullptr) {
 		UHealthComponent* HealthComponent = Player->FindComponentByClass<UHealthComponent>();
