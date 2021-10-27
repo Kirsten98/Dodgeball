@@ -33,6 +33,11 @@ protected:
 	//Sound attenuation of the previous sound
 	UPROPERTY(EditAnywhere, Category = Sound)
 	class USoundAttenuation* BounceSoundAttuention;
+
+	//The particle system the dodgeball will spawn when it hits the player
+	UPROPERTY(EditDefaultsOnly)
+	class UParticleSystem* HitParticles;
+
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
