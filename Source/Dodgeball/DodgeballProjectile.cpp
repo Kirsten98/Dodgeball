@@ -43,7 +43,7 @@ void ADodgeballProjectile::BeginPlay()
 void ADodgeballProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+				
 }
 
 void ADodgeballProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
@@ -61,6 +61,11 @@ void ADodgeballProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActo
 		if (HealthComponent != nullptr)
 		{	
 			HealthComponent->LoseHealth(Damage);
+		}
+
+		if (HitParticles != nullptr)
+		{
+			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitParticles, GetActorTransform());
 		}
 
 		Destroy();
