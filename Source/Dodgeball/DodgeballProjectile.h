@@ -30,6 +30,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = Sound)
 		class USoundBase* BounceSound;
 
+	UPROPERTY(EditDefaultsOnly, Category = Sound)
+		class USoundBase* DamageSound;
+
 	//Sound attenuation of the previous sound
 	UPROPERTY(EditAnywhere, Category = Sound)
 	class USoundAttenuation* BounceSoundAttuention;
